@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Joystick : MonoBehaviour
@@ -9,14 +10,16 @@ public class Joystick : MonoBehaviour
 
     Transform innerStick;
 
-    [Tooltip("Max distance the inner stick can move from the origin, in screen pixels.")]
+    [Tooltip("Max distance the inner stick can move from the origin, in points.")]
     [SerializeField] float maxStickDistance = 37.5f;
-    float maxStickDistanceSquared;
+    float maxStickDistancePixels;
+    float maxStickDistancePixelsSquared;
 
     void Awake()
     {
         innerStick = transform.GetChild(0);
-        maxStickDistanceSquared = maxStickDistance * maxStickDistance;
+        maxStickDistancePixels = maxStickDistance * Screen.dpi / 160;
+        maxStickDistancePixelsSquared = maxStickDistancePixels * maxStickDistancePixels;
     }
 
     Vector2 TouchPosition
@@ -96,9 +99,9 @@ public class Joystick : MonoBehaviour
 
         // If the touch position is too far away from the origin of the joystick:
         // (Distance check is done using squared values for optimisation)
-        if (distanceSquared > maxStickDistanceSquared)
+        if (distanceSquared > maxStickDistancePixelsSquared)
         {
-            target = screenStartTouch + maxStickDistance * dir.normalized;
+            target = screenStartTouch + maxStickDistancePixels * dir.normalized;
         }
         innerStick.position = target;
     }
