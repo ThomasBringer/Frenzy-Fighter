@@ -6,11 +6,14 @@ public class PlayerMove : MonoBehaviour
 {
     Joystick stick;
 
+    Animator anim;
+
     [SerializeField] float moveSensitivity = 10;
 
     void Awake()
     {
         stick = FindObjectOfType<Joystick>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     Vector3 VelocityWorld
@@ -24,6 +27,10 @@ public class PlayerMove : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.Translate(VelocityWorld * Time.deltaTime);
+        Vector3 velocity = VelocityWorld;
+        transform.Translate(velocity * Time.deltaTime, Space.World);
+        if (velocity != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(velocity, Vector3.up);
+        anim.SetBool("running", velocity != Vector3.zero);
     }
 }
