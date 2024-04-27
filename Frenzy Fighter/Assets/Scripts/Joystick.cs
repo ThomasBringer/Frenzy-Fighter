@@ -11,16 +11,20 @@ public class Joystick : MonoBehaviour
     Transform innerStick;
 
     [Tooltip("Max distance the inner stick can move from the origin, in points.")]
-    [SerializeField] float maxStickDistance = 37.5f;
+    [SerializeField] float maxStickDistancePoints = 37.5f;
     float maxStickDistancePixels;
     float maxStickDistancePixelsSquared;
+
+    [HideInInspector] public Vector2 velocityPercent = Vector2.zero; // Player velocity at current frame, in percentage (max velocity across a direction is 1).
 
     void Awake()
     {
         innerStick = transform.GetChild(0);
-        maxStickDistancePixels = maxStickDistance * Screen.dpi / 160;
+        maxStickDistancePixels = PointsToPixels(maxStickDistancePoints);
         maxStickDistancePixelsSquared = maxStickDistancePixels * maxStickDistancePixels;
     }
+
+    float PointsToPixels(float points) => points * Screen.dpi / 160;
 
     Vector2 TouchPosition
     {
@@ -88,6 +92,7 @@ public class Joystick : MonoBehaviour
     void EndTouch()
     {
         innerStick.localPosition = Vector2.zero;
+        velocityPercent = Vector2.zero;
         touching = false;
     }
 
@@ -101,8 +106,11 @@ public class Joystick : MonoBehaviour
         // (Distance check is done using squared values for optimisation)
         if (distanceSquared > maxStickDistancePixelsSquared)
         {
-            target = screenStartTouch + maxStickDistancePixels * dir.normalized;
+            dir = maxStickDistancePixels * dir.normalized;
+            target = screenStartTouch + dir;
         }
         innerStick.position = target;
+
+        velocityPercent = dir / maxStickDistancePixels;
     }
 }

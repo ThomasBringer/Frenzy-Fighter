@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Joystick stick;
+
+    [SerializeField] float moveSensitivity = 10;
+
+    void Awake()
     {
-        
+        stick = FindObjectOfType<Joystick>();
     }
 
-    // Update is called once per frame
-    void Update()
+    Vector3 VelocityWorld
     {
-        
+        get
+        {
+            Vector2 velocity2D = -moveSensitivity * stick.velocityPercent;
+            return new Vector3(velocity2D.x, 0, velocity2D.y);
+        }
+    }
+
+    void LateUpdate()
+    {
+        transform.Translate(VelocityWorld * Time.deltaTime);
     }
 }
