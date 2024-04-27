@@ -19,15 +19,55 @@ public class Joystick : MonoBehaviour
         maxStickDistanceSquared = maxStickDistance * maxStickDistance;
     }
 
+    Vector2 TouchPosition
+    {
+        get
+        {
+#if UNITY_EDITOR || UNITY_WEBGL
+            return Input.mousePosition;
+#else
+            return Input.GetTouch(0).position;
+#endif
+        }
+    }
+
+    bool StartTouching
+    {
+        get
+        {
+#if UNITY_EDITOR || UNITY_WEBGL
+            return Input.GetMouseButtonDown(0);
+#else
+            if (Input.touchCount == 0)
+                return false;
+            return Input.GetTouch(0).phase == TouchPhase.Began;
+#endif
+        }
+    }
+
+    bool EndTouching
+    {
+        get
+        {
+#if UNITY_EDITOR || UNITY_WEBGL
+            return Input.GetMouseButtonUp(0);
+#else
+            if (Input.touchCount == 0)
+                return false;
+            return Input.GetTouch(0).phase == TouchPhase.Ended;
+#endif
+        }
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (StartTouching)
         {
-            StartTouching();
+            StartTouch();
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (EndTouching)
         {
-            EndTouching();
+            EndTouch();
         }
         else if (touching)
         {
@@ -35,14 +75,14 @@ public class Joystick : MonoBehaviour
         }
     }
 
-    void StartTouching()
+    void StartTouch()
     {
-        screenStartTouch = Input.mousePosition;
+        screenStartTouch = TouchPosition;
         transform.position = screenStartTouch;
         touching = true;
     }
 
-    void EndTouching()
+    void EndTouch()
     {
         innerStick.localPosition = Vector2.zero;
         touching = false;
@@ -50,7 +90,7 @@ public class Joystick : MonoBehaviour
 
     void TouchingUpdate()
     {
-        Vector2 target = Input.mousePosition;
+        Vector2 target = TouchPosition;
         Vector2 dir = target - screenStartTouch;
         float distanceSquared = Vector2.SqrMagnitude(dir);
 
