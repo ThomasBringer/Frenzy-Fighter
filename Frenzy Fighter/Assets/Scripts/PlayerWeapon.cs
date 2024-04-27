@@ -10,6 +10,8 @@ public class PlayerWeapon : MonoBehaviour
     PlayerMove playerMove;
     Animator anim;
 
+    [SerializeField] Transform hand;
+
     void Awake()
     {
         playerAttack = GetComponentInChildren<PlayerAttack>();
@@ -23,6 +25,7 @@ public class PlayerWeapon : MonoBehaviour
         playerAttack.attackRange = weapon.attackRange;
         playerMove.speed = weapon.runSpeed;
         anim.SetFloat("fightSpeed", weapon.animationSpeed);
+        Instantiate(weapon.prefab, hand);
     }
 }
 
