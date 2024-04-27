@@ -7,6 +7,9 @@ public class PlayerMove : MonoBehaviour
     Joystick stick;
 
     Animator anim;
+    PlayerAttack playerAttack;
+
+    bool isRunning = false;
 
     [SerializeField] float moveSensitivity = 10;
 
@@ -14,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     {
         stick = FindObjectOfType<Joystick>();
         anim = GetComponentInChildren<Animator>();
+        playerAttack = GetComponentInChildren<PlayerAttack>();
     }
 
     Vector3 VelocityWorld
@@ -29,8 +33,20 @@ public class PlayerMove : MonoBehaviour
     {
         Vector3 velocity = VelocityWorld;
         transform.Translate(velocity * Time.deltaTime, Space.World);
-        if (velocity != Vector3.zero)
+
+        bool isRunningNew = velocity != Vector3.zero;
+
+        if (isRunningNew)
             transform.rotation = Quaternion.LookRotation(velocity, Vector3.up);
-        anim.SetBool("running", velocity != Vector3.zero);
+
+        if (isRunningNew != isRunning)
+            IsRunningChange(isRunningNew);
+    }
+
+    void IsRunningChange(bool isRunningNew)
+    {
+        anim.SetBool("running", isRunningNew);
+        isRunning = isRunningNew;
+        playerAttack.AttackChange(isAttacking: !isRunning);
     }
 }
