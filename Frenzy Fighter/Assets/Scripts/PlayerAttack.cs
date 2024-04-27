@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float damage = 10;
 
     [Tooltip("Max distance the player can hit an enemy, in world units.")]
-    [SerializeField] float range = 5;
+    public float attackRange = 5;
     Enemy target = null;
 
     Animator anim;
@@ -21,7 +21,10 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
+        if (target == null)
+            return;
         bool killed = target.TryDamage(damage);
+
         if (killed) // if the target died, select a new target
             SelectTarget();
     }
@@ -40,7 +43,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void SelectTarget()
     {
-        bool found = EnemiesTracker.IsEnemyInRange(transform.position, range); // search a target
+        bool found = EnemiesTracker.IsEnemyInRange(transform.position, attackRange); // search a target
 
         anim.SetBool("attacking", found);
 

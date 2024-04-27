@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour
     bool isRunning = false;
 
     [Tooltip("Max speed of the player, in world units per second.")]
-    [SerializeField] float speed = 10;
+    public float speed = 10;
 
     void Awake()
     {
