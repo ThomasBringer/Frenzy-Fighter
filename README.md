@@ -2,7 +2,7 @@
 
 ## Temps passé
 
-Phase 1 (obligatoire): 5h30
+Phase 1 (obligatoire) : 5h30
 
 Total: 5h30
 
