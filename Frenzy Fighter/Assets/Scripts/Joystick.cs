@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+// On-screen joystick.
 public class Joystick : MonoBehaviour
 {
     Vector2 screenStartTouch = Vector2.zero; // Position at which the user starts touching the screen.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Class for all characters that have health. Such characters can be damaged and killed.
 public class Health : MonoBehaviour
 {
     [Tooltip("Amount of health of the character.")]

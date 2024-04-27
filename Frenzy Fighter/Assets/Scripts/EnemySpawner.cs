@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for spawning enemies. Enemy will get spawned within the bounds every random delay.
 public class EnemySpawner : MonoBehaviour
 {
     [Tooltip("Min time between 2 enemy spawns.")]
@@ -33,5 +34,4 @@ public class EnemySpawner : MonoBehaviour
     {
         Instantiate(enemyPrefab, SpawnPoint, Quaternion.identity, transform);
     }
-
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for the ability of the player to move. Reading input from a on-screen joystick.
 public class PlayerMove : MonoBehaviour
 {
     Joystick stick;
@@ -46,7 +47,7 @@ public class PlayerMove : MonoBehaviour
             IsRunningChange(isRunningNew);
     }
 
-    // Triggered when the playeer starts or stops running.
+    // Triggered when the player starts or stops running.
     void IsRunningChange(bool isRunningNew)
     {
         anim.SetBool("running", isRunningNew);

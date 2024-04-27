@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for all enemies.
 [RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
 {

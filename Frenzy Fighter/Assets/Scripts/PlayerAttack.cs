@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for the ability of the player to attack. Can select enemy targets within a range and and attack them.
 public class PlayerAttack : MonoBehaviour
 {
     [Tooltip("Damage of each player attack.")]

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for the ability of the player to equip weapons. Changing the stats of PlayerAttack and PlayerMove accordingly.
 public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] Weapon[] weapons;
