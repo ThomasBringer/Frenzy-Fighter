@@ -20,19 +20,28 @@ public static class EnemiesTracker
         enemies.Remove(enemy);
     }
 
-    public static Enemy GetClosestEnemy(Vector3 centre)
+    public static Enemy lastClosestEnemy;
+
+    public static bool IsEnemyInRange(Vector3 centre, float range)
     {
+        if (enemies == null) return false;
+
         float minDistanceSquared = Mathf.Infinity;
-        Enemy closestEnemy = null;
+        float rangeSquared = range * range;
+
+        bool found = false;
         foreach (Enemy enemy in enemies)
         {
             float distanceSquared = Vector3.SqrMagnitude(enemy.transform.position - centre);
-            if (distanceSquared < minDistanceSquared)
+
+            // If enemy is in range AND closer than other enemies so far
+            if (distanceSquared < Mathf.Min(rangeSquared, minDistanceSquared))
             {
-                closestEnemy = enemy;
+                lastClosestEnemy = enemy;
                 minDistanceSquared = distanceSquared;
+                found = true;
             }
         }
-        return closestEnemy;
+        return found;
     }
 }

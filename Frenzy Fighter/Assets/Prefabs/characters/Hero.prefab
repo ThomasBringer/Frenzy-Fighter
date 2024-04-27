@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2148928661061455951}
   - component: {fileID: 4278100186079492270}
-  - component: {fileID: 37049249006797963}
+  - component: {fileID: 6294555364555587293}
   m_Layer: 6
   m_Name: Alice
   m_TagString: Untagged
@@ -481,7 +481,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &37049249006797963
+--- !u!114 &6294555364555587293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -493,7 +493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdd524d67821475589942448f4f1ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 10
+  range: 5
+  isRunning: 0
 --- !u!1 &3206923099687242354
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecaf981c33a648e8ac652ace8d1b0b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSensitivity: 10
+  speed: 10
 --- !u!1 &3512741108777884559
 GameObject:
   m_ObjectHideFlags: 0

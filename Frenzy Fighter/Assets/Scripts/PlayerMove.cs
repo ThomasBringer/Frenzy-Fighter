@@ -11,7 +11,8 @@ public class PlayerMove : MonoBehaviour
 
     bool isRunning = false;
 
-    [SerializeField] float moveSensitivity = 10;
+    [Tooltip("Max speed of the player, in world units per second.")]
+    [SerializeField] float speed = 10;
 
     void Awake()
     {
@@ -26,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     {
         get
         {
-            Vector2 velocity2D = -moveSensitivity * stick.velocityPercent;
+            Vector2 velocity2D = -speed * stick.velocityPercent;
             return new Vector3(velocity2D.x, 0, velocity2D.y);
         }
     }
@@ -50,7 +51,7 @@ public class PlayerMove : MonoBehaviour
     {
         anim.SetBool("running", isRunningNew);
         isRunning = isRunningNew;
-        if (!isRunningNew) // if the player stops running, select a new target
-            playerAttack.SelectTarget();
+        playerAttack.isRunning = isRunning;
+        if (!isRunningNew) playerAttack.SelectTarget();
     }
 }

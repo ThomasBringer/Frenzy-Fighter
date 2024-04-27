@@ -5,10 +5,11 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    [Tooltip("Amount of health of the character.")]
     [SerializeField] float health;
 
-    public UnityEvent onDamage = new UnityEvent();
-    public UnityEvent onDie = new UnityEvent();
+    [HideInInspector] public UnityEvent onDamage = new UnityEvent();
+    [HideInInspector] public UnityEvent onDie = new UnityEvent();
     bool dead = false;
 
     // Damage the current character. Returns true if the character is killed.
