@@ -15,6 +15,11 @@ public static class EnemiesTracker
         enemies.Add(enemy);
     }
 
+    public static void Remove(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+    }
+
     public static Enemy GetClosestEnemy(Vector3 centre)
     {
         float minDistanceSquared = Mathf.Infinity;

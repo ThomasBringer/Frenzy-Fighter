@@ -5,10 +5,17 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] float damage = 10;
+    Enemy target;
 
     public void Attack()
     {
-        Enemy enemy = EnemiesTracker.GetClosestEnemy(transform.position);
-        enemy.TryDamage(damage);
+        bool killed = target.TryDamage(damage);
+        if (killed) // if the target died, select a new target
+            SelectTarget();
+    }
+
+    public void SelectTarget()
+    {
+        target = EnemiesTracker.GetClosestEnemy(transform.position);
     }
 }

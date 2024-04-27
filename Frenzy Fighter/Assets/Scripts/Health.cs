@@ -11,14 +11,19 @@ public class Health : MonoBehaviour
     public UnityEvent onDie = new UnityEvent();
     bool dead = false;
 
-    public void Damage(float damage)
+    // Damage the current character. Returns true if the character is killed.
+    public bool Damage(float damage)
     {
-        if (dead) return;
+        if (dead) return true;
         health -= damage;
-        if (health <= 0)
+
+        bool fatal = health <= 0;
+        if (fatal)
             Die();
         else
             onDamage.Invoke();
+
+        return fatal;
     }
 
     void Die()

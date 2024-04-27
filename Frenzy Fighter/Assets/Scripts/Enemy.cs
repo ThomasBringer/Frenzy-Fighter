@@ -27,20 +27,19 @@ public class Enemy : MonoBehaviour
         health.onDamage.RemoveListener(OnDamage);
     }
 
-    public void TryDamage(float damage)
+    public bool TryDamage(float damage)
     {
-        health.Damage(damage);
+        return health.Damage(damage);
     }
 
     public void OnDamage()
     {
-        Debug.Log("Anim Damage");
         anim.SetTrigger("damage");
     }
 
     void Die()
     {
-        Debug.Log("Anim Die");
         anim.SetTrigger("die");
+        EnemiesTracker.Remove(this);
     }
 }

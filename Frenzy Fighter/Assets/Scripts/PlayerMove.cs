@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     Joystick stick;
 
     Animator anim;
-    // PlayerAttack playerAttack;
+    PlayerAttack playerAttack;
 
     bool isRunning = false;
 
@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     {
         stick = FindObjectOfType<Joystick>();
         anim = GetComponentInChildren<Animator>();
-        // playerAttack = GetComponentInChildren<PlayerAttack>();
+        playerAttack = GetComponentInChildren<PlayerAttack>();
     }
 
     void Start() => IsRunningChange(false);
@@ -45,10 +45,12 @@ public class PlayerMove : MonoBehaviour
             IsRunningChange(isRunningNew);
     }
 
+    // Triggered when the playeer starts or stops running.
     void IsRunningChange(bool isRunningNew)
     {
         anim.SetBool("running", isRunningNew);
         isRunning = isRunningNew;
-        // playerAttack.AttackChange(isAttacking: !isRunning);
+        if (!isRunningNew) // if the player stops running, select a new target
+            playerAttack.SelectTarget();
     }
 }
