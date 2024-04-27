@@ -34,13 +34,11 @@ public class Enemy : MonoBehaviour
 
     public void OnDamage()
     {
-        Debug.Log("damage");
         anim.SetTrigger("damage");
     }
 
     void Die()
     {
-        Debug.Log("die");
         anim.SetTrigger("die");
         EnemiesTracker.Remove(this);
     }

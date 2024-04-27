@@ -557,6 +557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 11400000, guid: 02c1352a7466e48339b058e4c0c3398c, type: 2}
+  - {fileID: 11400000, guid: 87bc83cc9f3734fce801c4b75d4d164f, type: 2}
+  - {fileID: 11400000, guid: 0796a51d10668450c895e54237a03233, type: 2}
   hand: {fileID: 1993995369825730728}
 --- !u!1 &3512741108777884559
 GameObject:

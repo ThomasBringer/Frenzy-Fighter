@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2694b438ef2dd40fca1eb09ee1f8a8bc, type: 3}
-  m_Name: CurvedSword
+  m_Name: GreatSword
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6937623146161485751, guid: 4d0814cafad460246890ec829fa7071d, type: 3}
-  animationSpeed: 1
-  runSpeed: 12
-  attackRange: 4
+  prefab: {fileID: 478356759475107179, guid: 17cf6e9fc28f3a544bc062d510f66f4a, type: 3}
+  animationSpeed: 0.5
+  runSpeed: 4
+  attackRange: 3
