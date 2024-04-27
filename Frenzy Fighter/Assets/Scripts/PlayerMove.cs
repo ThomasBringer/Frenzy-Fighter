@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     Joystick stick;
 
     Animator anim;
-    PlayerAttack playerAttack;
+    // PlayerAttack playerAttack;
 
     bool isRunning = false;
 
@@ -17,8 +17,10 @@ public class PlayerMove : MonoBehaviour
     {
         stick = FindObjectOfType<Joystick>();
         anim = GetComponentInChildren<Animator>();
-        playerAttack = GetComponentInChildren<PlayerAttack>();
+        // playerAttack = GetComponentInChildren<PlayerAttack>();
     }
+
+    void Start() => IsRunningChange(false);
 
     Vector3 VelocityWorld
     {
@@ -47,6 +49,6 @@ public class PlayerMove : MonoBehaviour
     {
         anim.SetBool("running", isRunningNew);
         isRunning = isRunningNew;
-        playerAttack.AttackChange(isAttacking: !isRunning);
+        // playerAttack.AttackChange(isAttacking: !isRunning);
     }
 }

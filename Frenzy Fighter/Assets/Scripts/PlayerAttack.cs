@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    void Awake()
-    {
-        Attack();
-    }
+    [SerializeField] float damage = 10;
 
-    public void AttackChange(bool isAttacking)
-    {
-
-    }
-
-    void Attack()
+    public void Attack()
     {
         Enemy enemy = EnemiesTracker.GetClosestEnemy(transform.position);
+        enemy.TryDamage(damage);
     }
 }
