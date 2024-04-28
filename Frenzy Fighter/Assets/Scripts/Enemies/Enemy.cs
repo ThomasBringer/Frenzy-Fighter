@@ -79,8 +79,7 @@ public class Enemy : MonoBehaviour
         weaponSpawner = FindObjectOfType<WeaponSpawner>();
 
         rendrr = GetComponentInChildren<Renderer>();
-        flashWhitePropBlock = new MaterialPropertyBlock();
-        flashWhitePropBlock.SetTexture("_BaseMap", flashWhiteTexture);
+        rendrr.material.EnableKeyword("_EMISSION");
 
         // When enemy spawns, his health is buffed depending on the amount of enemies killed so far.
         health.Heal(enemyKillCount * healthBuffPerEnemyKilled);
@@ -259,12 +258,12 @@ public class Enemy : MonoBehaviour
 
     void FlashIn()
     {
-        rendrr.SetPropertyBlock(flashWhitePropBlock);
+        rendrr.material.SetColor("_EmissionColor", Color.white);
         Invoke(nameof(FlashOut), flashWhiteDuration);
     }
 
     void FlashOut()
     {
-        rendrr.SetPropertyBlock(null);
+        rendrr.material.SetColor("_EmissionColor", Color.black);
     }
 }
