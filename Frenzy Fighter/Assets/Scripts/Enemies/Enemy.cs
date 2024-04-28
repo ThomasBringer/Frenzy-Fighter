@@ -92,9 +92,6 @@ public class Enemy : MonoBehaviour
 
     void AliveUpdate()
     {
-        // Look towards player (but ignore Y-axis)
-        // graphics.LookAt(transform.position + Vector3.Scale(player.transform.position - transform.position, new Vector3(1, 0, 1)));
-
         if (!chasingPlayer)
             PatrollingUpdate();
     }
@@ -119,20 +116,14 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(player.transform.position);
     }
 
-    void SetDestinationToRandom()
-    {
-        agent.SetDestination(player.transform.position);
-    }
-
     void StopAgent()
     {
         agent.isStopped = true;
         if (chasingPlayer)
             CancelInvoke(nameof(SetDestinationToPlayer));
-        else
-            CancelInvoke(nameof(SetDestinationToRandom));
     }
 
+    // Check if the player is in sight of the enemy
     void CheckPlayerSight()
     {
         float distanceSquared = Vector3.SqrMagnitude(player.transform.position - transform.position);
@@ -145,10 +136,12 @@ public class Enemy : MonoBehaviour
     void StartChasingPlayer()
     {
         chasingPlayer = true;
-        CancelInvoke(nameof(SetDestinationToRandom));
+
+        // Find player repeatedly
         InvokeRepeating(nameof(SetDestinationToPlayer), 0, updatePlayerTargetDelay);
     }
 
+    // Find a walk point when patrolling
     void FindPatrolPoint()
     {
         bool success;
