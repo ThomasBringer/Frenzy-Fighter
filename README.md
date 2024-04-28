@@ -6,9 +6,11 @@ Phase 1 - Obligatoire : 5h30
 
 Phase 2 - UI : 1h30
 
+Phase 3 - Ennemis: 3h30
+
 -----
 
-Total : 7h
+Total : 10h30
 
 ## Difficultés et problématiques techniques
 
