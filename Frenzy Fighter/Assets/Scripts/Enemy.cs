@@ -41,12 +41,12 @@ public class Enemy : MonoBehaviour
         return health.Damage(damage);
     }
 
-    public void OnDamage()
+    public void OnDamage(float damage)
     {
         anim.SetTrigger("damage");
     }
 
-    void Die()
+    void Die(float damage)
     {
         anim.SetTrigger("die");
         EnemiesTracker.Remove(this);

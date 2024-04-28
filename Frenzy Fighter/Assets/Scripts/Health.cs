@@ -9,8 +9,8 @@ public class Health : MonoBehaviour
     [Tooltip("Amount of health of the character.")]
     [SerializeField] float health;
 
-    [HideInInspector] public UnityEvent onDamage = new UnityEvent();
-    [HideInInspector] public UnityEvent onDie = new UnityEvent();
+    [HideInInspector] public UnityEvent<float> onDamage = new UnityEvent<float>();
+    [HideInInspector] public UnityEvent<float> onDie = new UnityEvent<float>();
     [HideInInspector] public bool dead = false;
 
     HealthBar healthBar;
@@ -34,17 +34,17 @@ public class Health : MonoBehaviour
 
         bool fatal = health <= 0;
         if (fatal)
-            Die();
+            Die(damage);
         else
-            onDamage.Invoke();
+            onDamage.Invoke(damage);
 
         return fatal;
     }
 
-    void Die()
+    void Die(float damage)
     {
         dead = true;
-        onDie.Invoke();
+        onDie.Invoke(damage);
     }
 
     void TryUpdateHealthBar()

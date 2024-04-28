@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d6929c0ced84536bd940a2e15eb4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
   onDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -623,6 +623,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 483656178951460131, guid: f60b0d4d1c49647d38ea7c6a15c11d16, type: 3}
+      propertyPath: m_fontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 483656178951460131, guid: f60b0d4d1c49647d38ea7c6a15c11d16, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 48
+      objectReference: {fileID: 0}
     - target: {fileID: 1450359274924399906, guid: f60b0d4d1c49647d38ea7c6a15c11d16, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -711,6 +719,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6878752168893149660, guid: f60b0d4d1c49647d38ea7c6a15c11d16, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 641233700192451638}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
