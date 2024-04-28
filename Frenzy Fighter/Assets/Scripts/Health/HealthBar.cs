@@ -27,6 +27,7 @@ public class HealthBar : MonoBehaviour
     {
         health.onDie.AddListener(OnDieOrDamage);
         health.onDamage.AddListener(OnDieOrDamage);
+        health.onHeal.AddListener(OnHeal);
     }
 
     void OnDisable()
@@ -35,8 +36,18 @@ public class HealthBar : MonoBehaviour
         health.onDamage.RemoveListener(OnDieOrDamage);
     }
 
-    void OnDieOrDamage(float damage, Health h)
+    void OnDieOrDamage(float damage)
     {
+        SetHealth(health.health);
+    }
+
+    void OnHeal(float heal)
+    {
+        if (health.health > slider.maxValue)
+        {
+            slider.maxValue = health.health;
+        }
+
         SetHealth(health.health);
     }
 

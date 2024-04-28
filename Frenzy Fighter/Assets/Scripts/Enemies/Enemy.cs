@@ -39,6 +39,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] float distanceReachWalkPoint = .5f;
     float distanceReachWalkPointSquared;
 
+    [SerializeField] float healthBuffPerEnemyKilled = 25;
+    bool damaged = false;
+
+    static int enemyKillCount = 0;
+
     void Awake()
     {
         health = GetComponent<Health>();
@@ -48,6 +53,9 @@ public class Enemy : MonoBehaviour
         playerSightDistanceSquared = playerSightDistance * playerSightDistance;
         distanceReachWalkPointSquared = distanceReachWalkPoint * distanceReachWalkPoint;
         FindPatrolPoint();
+
+        // When enemy spawns, his health is buffed depending on the amount of enemies killed so far.
+        health.Heal(enemyKillCount * healthBuffPerEnemyKilled);
     }
 
     void OnEnable()
@@ -55,6 +63,7 @@ public class Enemy : MonoBehaviour
         EnemiesTracker.Add(this);
         health.onDie.AddListener(Die);
         health.onDamage.AddListener(OnDamage);
+        Health.onDieAny.AddListener(OnAnyEnemyDied);
     }
 
     void OnDisable()
@@ -68,20 +77,22 @@ public class Enemy : MonoBehaviour
         // If enemy is hit but not chasing player, start chasing him.
         if (!chasingPlayer) StartChasingPlayer();
 
+        damaged = true;
         return health.Damage(damage);
     }
 
-    public void OnDamage(float damage, Health health)
+    public void OnDamage(float damage)
     {
         anim.SetTrigger("damage");
     }
 
-    void Die(float damage, Health health)
+    void Die(float damage)
     {
         anim.SetTrigger("die");
         EnemiesTracker.Remove(this);
         Destroy(gameObject, dieDestroyDelay);
         StopAgent();
+        enemyKillCount++;
     }
 
     void Update()
@@ -155,5 +166,21 @@ public class Enemy : MonoBehaviour
 
         walkPoint = hit.position;
         agent.SetDestination(walkPoint);
+    }
+
+    void OnAnyEnemyDied(float damage, Health h)
+    {
+        // Check if the enemy who died is the current enemy
+        if (h == health)
+            return;
+
+        OnOtherEnemyDied();
+    }
+
+    void OnOtherEnemyDied()
+    {
+        // If enemy is undamaged, each enemy killed gives him a health buff.
+        if (!damaged)
+            health.Heal(healthBuffPerEnemyKilled);
     }
 }

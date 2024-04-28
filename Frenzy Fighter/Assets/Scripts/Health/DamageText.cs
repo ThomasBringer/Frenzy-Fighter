@@ -28,7 +28,7 @@ public class DamageText : MonoBehaviour
         health.onDamage.RemoveListener(OnDieOrDamage);
     }
 
-    void OnDieOrDamage(float damage, Health health)
+    void OnDieOrDamage(float damage)
     {
         text.text = damage + "";
         Show();

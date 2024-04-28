@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public static class EnemiesTracker
 {
     static List<Enemy> enemies;
-    public static UnityEvent<Enemy> onEnemyAdded = new UnityEvent<Enemy>();
 
     public static void Add(Enemy enemy)
     {
@@ -16,7 +15,6 @@ public static class EnemiesTracker
             enemies = new List<Enemy>();
         }
         enemies.Add(enemy);
-        onEnemyAdded.Invoke(enemy);
     }
 
     public static void Remove(Enemy enemy)

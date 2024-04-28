@@ -20,27 +20,18 @@ public class Score : MonoBehaviour
 
     void OnEnable()
     {
-        // Listen to enemies being added.
-        EnemiesTracker.onEnemyAdded.AddListener(OnEnemyAdded);
+        Health.onDieAny.AddListener(OnEnemyKilled);
     }
 
     void OnDisable()
     {
-        EnemiesTracker.onEnemyAdded.RemoveListener(OnEnemyAdded);
-    }
-
-    void OnEnemyAdded(Enemy enemy)
-    {
-        // When enemy is added, listen when he is killed.
-        enemy.health.onDie.AddListener(OnEnemyKilled);
+        Health.onDieAny.RemoveListener(OnEnemyKilled);
     }
 
     void OnEnemyKilled(float damage, Health health)
     {
         score += bonusPerKill;
         UpdateText();
-        // Enemy is dead, we can stop listening to him being killed.
-        health.onDie.RemoveListener(OnEnemyKilled);
     }
 
     void UpdateText()
