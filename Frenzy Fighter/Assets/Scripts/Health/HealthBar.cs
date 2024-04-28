@@ -35,7 +35,7 @@ public class HealthBar : MonoBehaviour
         health.onDamage.RemoveListener(OnDieOrDamage);
     }
 
-    void OnDieOrDamage(float damage)
+    void OnDieOrDamage(float damage, Health h)
     {
         SetHealth(health.health);
     }

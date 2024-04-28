@@ -9,8 +9,8 @@ public class Health : MonoBehaviour
     [Tooltip("Amount of health of the character.")]
     public float health;
 
-    [HideInInspector] public UnityEvent<float> onDamage = new UnityEvent<float>();
-    [HideInInspector] public UnityEvent<float> onDie = new UnityEvent<float>();
+    [HideInInspector] public UnityEvent<float, Health> onDamage = new UnityEvent<float, Health>();
+    [HideInInspector] public UnityEvent<float, Health> onDie = new UnityEvent<float, Health>();
     [HideInInspector] public bool dead = false;
 
     // Damage the current character. Returns true if the character is killed.
@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
         if (fatal)
             Die(damage);
         else
-            onDamage.Invoke(damage);
+            onDamage.Invoke(damage, this);
 
         return fatal;
     }
@@ -32,6 +32,6 @@ public class Health : MonoBehaviour
     void Die(float damage)
     {
         dead = true;
-        onDie.Invoke(damage);
+        onDie.Invoke(damage, this);
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
 {
-    Health health;
+    [HideInInspector] public Health health;
     Animator anim;
 
     [Tooltip("After the enemy is killed, it will get destroyed after this delay.")]
@@ -71,12 +71,12 @@ public class Enemy : MonoBehaviour
         return health.Damage(damage);
     }
 
-    public void OnDamage(float damage)
+    public void OnDamage(float damage, Health health)
     {
         anim.SetTrigger("damage");
     }
 
-    void Die(float damage)
+    void Die(float damage, Health health)
     {
         anim.SetTrigger("die");
         EnemiesTracker.Remove(this);
