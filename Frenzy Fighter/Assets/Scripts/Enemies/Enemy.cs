@@ -19,17 +19,25 @@ public class Enemy : MonoBehaviour
 
     NavMeshAgent agent;
 
+    [Tooltip("When chasing player, direction to walk towards will be recalculated every such delay.")]
     [SerializeField] float updatePlayerTargetDelay = .5f;
 
+    [Tooltip("The distance at which the enemy can 'see' (detect and start chasing) the player.")]
     [SerializeField] float playerSightDistance = 8;
     float playerSightDistanceSquared;
     bool chasingPlayer = false;
 
-    [SerializeField] float minWalkPointDistance = 5;
-    [SerializeField] float maxWalkPointDistance = 5;
+    [Tooltip("When patrolling, min distance the next walk point will be from the enemy.")]
+    [SerializeField] float minWalkPointDistance = 8;
+    [Tooltip("When patrolling, max distance the next walk point will be from the enemy.")]
+    [SerializeField] float maxWalkPointDistance = 24;
     float RandomWalkPointDistance => Random.Range(minWalkPointDistance, maxWalkPointDistance);
 
     Vector3 walkPoint;
+
+    [Tooltip("When patrolling, distance at which the next walk point is considered reached.")]
+    [SerializeField] float distanceReachWalkPoint = .5f;
+    float distanceReachWalkPointSquared;
 
     void Awake()
     {
@@ -38,6 +46,7 @@ public class Enemy : MonoBehaviour
         player = FindObjectOfType<PlayerMove>();
         agent = GetComponentInChildren<NavMeshAgent>();
         playerSightDistanceSquared = playerSightDistance * playerSightDistance;
+        distanceReachWalkPointSquared = distanceReachWalkPoint * distanceReachWalkPoint;
         FindPatrolPoint();
     }
 
@@ -84,7 +93,7 @@ public class Enemy : MonoBehaviour
     void AliveUpdate()
     {
         // Look towards player (but ignore Y-axis)
-        graphics.LookAt(transform.position + Vector3.Scale(player.transform.position - transform.position, new Vector3(1, 0, 1)));
+        // graphics.LookAt(transform.position + Vector3.Scale(player.transform.position - transform.position, new Vector3(1, 0, 1)));
 
         if (!chasingPlayer)
             PatrollingUpdate();
@@ -98,8 +107,8 @@ public class Enemy : MonoBehaviour
 
     void CheckWalkPointDistance()
     {
-        float distanceToWalkPoint = Vector3.SqrMagnitude(walkPoint - transform.position);
-        if (distanceToWalkPoint < .5f)
+        float distanceToWalkPointSquared = Vector3.SqrMagnitude(walkPoint - transform.position);
+        if (distanceToWalkPointSquared < distanceReachWalkPointSquared)
         {
             FindPatrolPoint();
         }
