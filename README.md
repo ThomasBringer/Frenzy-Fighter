@@ -10,9 +10,11 @@ Phase 3 - Ennemis : 3h30
 
 Phase 4 - Armes : 1h
 
+Phase 5 - Polish : 2h30
+
 -----
 
-Total : 11h30
+Total : 14h
 
 ## Difficultés et problématiques techniques
 
