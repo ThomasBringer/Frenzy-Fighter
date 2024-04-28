@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("Max speed of the player, in world units per second.")]
     public float speed = 10;
 
+    [SerializeField] Transform graphics;
+
     void Awake()
     {
         stick = FindObjectOfType<Joystick>();
@@ -41,7 +43,10 @@ public class PlayerMove : MonoBehaviour
         bool isRunningNew = velocity != Vector3.zero;
 
         if (isRunningNew)
-            transform.rotation = Quaternion.LookRotation(velocity, Vector3.up);
+        {
+            // Look forward
+            graphics.LookAt(transform.position + velocity);
+        }
 
         if (isRunningNew != isRunning)
             IsRunningChange(isRunningNew);

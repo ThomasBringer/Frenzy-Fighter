@@ -15,6 +15,8 @@ public class PlayerAttack : MonoBehaviour
     Animator anim;
     [HideInInspector] public bool isRunning;
 
+    [SerializeField] Transform graphics;
+
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -47,7 +49,10 @@ public class PlayerAttack : MonoBehaviour
     void TryLookAtTarget()
     {
         if (target != null)
-            transform.LookAt(target.transform);
+        {
+            // Look towards target (but ignore Y-axis)
+            graphics.LookAt(transform.position + Vector3.Scale(target.transform.position - transform.position, new Vector3(1, 0, 1)));
+        }
     }
 
     public void SelectTarget()
