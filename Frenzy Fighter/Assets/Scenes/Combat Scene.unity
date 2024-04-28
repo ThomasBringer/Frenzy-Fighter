@@ -456,7 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minTimeBetweenSpawns: 0.5
   maxTimeBetweenSpawns: 5
-  spawnBounds: {x: 10, y: 10}
+  spawnBounds: {x: 20, y: 20}
   enemyPrefab: {fileID: 4630540926010471783, guid: 41e04faa14fb7a34e8b16750ec910fc3, type: 3}
 --- !u!4 &850477223
 Transform:

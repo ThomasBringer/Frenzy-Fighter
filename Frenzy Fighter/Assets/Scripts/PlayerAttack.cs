@@ -32,14 +32,22 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (!isRunning)
-            TrySelectTarget();
+        if (isRunning) return;
+
+        TrySelectTarget();
+        TryLookAtTarget();
     }
 
     void TrySelectTarget()
     {
         if (target == null)
             SelectTarget();
+    }
+
+    void TryLookAtTarget()
+    {
+        if (target != null)
+            transform.LookAt(target.transform);
     }
 
     public void SelectTarget()
