@@ -42,11 +42,13 @@ public class PlayerDie : LoadScene
         playerAttack.enabled = false;
         playerWeapon.enabled = false;
 
-        EnemiesTracker.Clear();
-        WeaponsTracker.Clear();
-
         Invoke(nameof(LoadGameOver), delayLoadGameOverScene);
     }
 
-    void LoadGameOver() => Load("Game Over Menu");
+    void LoadGameOver()
+    {
+        EnemiesTracker.Clear();
+        WeaponsTracker.Clear();
+        Load("Game Over Menu");
+    }
 }

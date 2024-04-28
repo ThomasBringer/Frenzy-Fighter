@@ -59,6 +59,9 @@ MonoBehaviour:
   healthBuffPerEnemyKilled: 25
   attackRange: 2.5
   damage: 10
+  weaponSpawnEjectDistance: 3
+  flashWhiteTexture: {fileID: 2800000, guid: b72686575cfdbcc4487a9f58097ce943, type: 3}
+  flashWhiteDuration: 0.2
 --- !u!114 &641233700192451638
 MonoBehaviour:
   m_ObjectHideFlags: 0

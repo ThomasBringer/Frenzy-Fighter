@@ -58,6 +58,11 @@ public class Enemy : MonoBehaviour
     [Tooltip("When dropped, weapons will get ejected away from the player by this distance.")]
     [SerializeField] float weaponSpawnEjectDistance = 3;
 
+    Renderer rendrr;
+    MaterialPropertyBlock flashWhitePropBlock;
+    [SerializeField] Texture flashWhiteTexture;
+    [SerializeField] float flashWhiteDuration = .1f;
+
     void Awake()
     {
         health = GetComponent<Health>();
@@ -72,6 +77,10 @@ public class Enemy : MonoBehaviour
         FindPatrolPoint();
 
         weaponSpawner = FindObjectOfType<WeaponSpawner>();
+
+        rendrr = GetComponentInChildren<Renderer>();
+        flashWhitePropBlock = new MaterialPropertyBlock();
+        flashWhitePropBlock.SetTexture("_BaseMap", flashWhiteTexture);
 
         // When enemy spawns, his health is buffed depending on the amount of enemies killed so far.
         health.Heal(enemyKillCount * healthBuffPerEnemyKilled);
@@ -102,6 +111,7 @@ public class Enemy : MonoBehaviour
 
     public void OnDamage(float damage)
     {
+        FlashIn();
         anim.SetTrigger("damage");
     }
 
@@ -245,5 +255,16 @@ public class Enemy : MonoBehaviour
         Vector3 dir = Vector3.Scale(transform.position - player.position, new Vector3(1, 0, 1)).normalized;
         Vector3 offset = weaponSpawnEjectDistance * dir;
         weaponSpawner.SpawnWeapon(transform.position + offset);
+    }
+
+    void FlashIn()
+    {
+        rendrr.SetPropertyBlock(flashWhitePropBlock);
+        Invoke(nameof(FlashOut), flashWhiteDuration);
+    }
+
+    void FlashOut()
+    {
+        rendrr.SetPropertyBlock(null);
     }
 }
