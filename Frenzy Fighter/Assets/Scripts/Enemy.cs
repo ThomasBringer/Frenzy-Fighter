@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
 
     PlayerMove player;
 
+    [SerializeField] Transform graphics;
+
     void Awake()
     {
         health = GetComponent<Health>();
@@ -53,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(player.transform);
+        if (!health.dead)
+            graphics.LookAt(player.transform);
     }
 }

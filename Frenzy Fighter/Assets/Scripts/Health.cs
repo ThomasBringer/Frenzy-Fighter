@@ -11,13 +11,26 @@ public class Health : MonoBehaviour
 
     [HideInInspector] public UnityEvent onDamage = new UnityEvent();
     [HideInInspector] public UnityEvent onDie = new UnityEvent();
-    bool dead = false;
+    [HideInInspector] public bool dead = false;
+
+    HealthBar healthBar;
+    bool hasHealthBar;
+
+    void Awake()
+    {
+        healthBar = GetComponentInChildren<HealthBar>();
+        hasHealthBar = healthBar != null;
+        if (hasHealthBar)
+            healthBar.InitHealth(health);
+    }
 
     // Damage the current character. Returns true if the character is killed.
     public bool Damage(float damage)
     {
         if (dead) return true;
         health -= damage;
+
+        TryUpdateHealthBar();
 
         bool fatal = health <= 0;
         if (fatal)
@@ -32,5 +45,11 @@ public class Health : MonoBehaviour
     {
         dead = true;
         onDie.Invoke();
+    }
+
+    void TryUpdateHealthBar()
+    {
+        if (hasHealthBar)
+            healthBar.SetHealth(health);
     }
 }
