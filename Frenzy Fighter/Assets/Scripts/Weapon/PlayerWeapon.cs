@@ -10,6 +10,10 @@ public class PlayerWeapon : MonoBehaviour
     Animator anim;
 
     [SerializeField] Transform hand;
+    [Tooltip("Max distance for the player to grab a dropped weapon.")]
+    [SerializeField] float weaponGrabRange = 2;
+
+    GameObject currentWeapon;
 
     void Awake()
     {
@@ -23,6 +27,28 @@ public class PlayerWeapon : MonoBehaviour
         playerAttack.attackRange = weapon.attackRange;
         playerMove.speed = weapon.runSpeed;
         anim.SetFloat("fightSpeed", weapon.animationSpeed);
-        Instantiate(weapon.prefab, hand);
+        currentWeapon = Instantiate(weapon.prefab, hand);
+    }
+
+    void Unequip()
+    {
+        Destroy(currentWeapon);
+    }
+
+    void Reequip(Weapon weapon)
+    {
+        Unequip();
+        Equip(weapon);
+    }
+
+    void LateUpdate()
+    {
+        bool found = WeaponsTracker.IsWeaponInRange(transform.position, weaponGrabRange);
+        if (found)
+        {
+            WeaponItem weapon = WeaponsTracker.lastClosestWeapon;
+            Destroy(weapon.gameObject);
+            Reequip(weapon.weaponStats);
+        }
     }
 }

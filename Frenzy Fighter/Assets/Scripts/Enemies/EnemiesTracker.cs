@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 // This class keeps track of which enemies are alive.
 public static class EnemiesTracker

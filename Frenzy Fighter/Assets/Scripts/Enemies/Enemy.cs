@@ -55,6 +55,9 @@ public class Enemy : MonoBehaviour
 
     WeaponSpawner weaponSpawner;
 
+    [Tooltip("When dropped, weapons will get ejected away from the player by this distance.")]
+    [SerializeField] float weaponSpawnEjectDistance = 3;
+
     void Awake()
     {
         health = GetComponent<Health>();
@@ -239,6 +242,8 @@ public class Enemy : MonoBehaviour
 
     void DropWeapon()
     {
-        weaponSpawner.SpawnWeapon(transform.position);
+        Vector3 dir = Vector3.Scale(transform.position - player.position, new Vector3(1, 0, 1)).normalized;
+        Vector3 offset = weaponSpawnEjectDistance * dir;
+        weaponSpawner.SpawnWeapon(transform.position + offset);
     }
 }
