@@ -12,7 +12,7 @@ Phase 4 - Armes : 1h
 
 -----
 
-Total : 10h30
+Total : 11h30
 
 ## Difficultés et problématiques techniques
 
