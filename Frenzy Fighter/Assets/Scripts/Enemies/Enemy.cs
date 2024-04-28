@@ -21,17 +21,24 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] float updatePlayerTargetDelay = .5f;
 
+    [SerializeField] float playerSightDistance = 8;
+    float playerSightDistanceSquared;
+    bool chasingPlayer = false;
+
+    [SerializeField] float minWalkPointDistance = 5;
+    [SerializeField] float maxWalkPointDistance = 5;
+    float RandomWalkPointDistance => Random.Range(minWalkPointDistance, maxWalkPointDistance);
+
+    Vector3 walkPoint;
+
     void Awake()
     {
         health = GetComponent<Health>();
         anim = GetComponentInChildren<Animator>();
         player = FindObjectOfType<PlayerMove>();
         agent = GetComponentInChildren<NavMeshAgent>();
-    }
-
-    void Start()
-    {
-        InvokeRepeating(nameof(SetAgentDestination), 0, updatePlayerTargetDelay);
+        playerSightDistanceSquared = playerSightDistance * playerSightDistance;
+        FindPatrolPoint();
     }
 
     void OnEnable()
@@ -49,6 +56,9 @@ public class Enemy : MonoBehaviour
 
     public bool TryDamage(float damage)
     {
+        // If enemy is hit but not chasing player, start chasing him.
+        if (!chasingPlayer) StartChasingPlayer();
+
         return health.Damage(damage);
     }
 
@@ -75,9 +85,32 @@ public class Enemy : MonoBehaviour
     {
         // Look towards player (but ignore Y-axis)
         graphics.LookAt(transform.position + Vector3.Scale(player.transform.position - transform.position, new Vector3(1, 0, 1)));
+
+        if (!chasingPlayer)
+            PatrollingUpdate();
     }
 
-    void SetAgentDestination()
+    void PatrollingUpdate()
+    {
+        CheckWalkPointDistance();
+        CheckPlayerSight();
+    }
+
+    void CheckWalkPointDistance()
+    {
+        float distanceToWalkPoint = Vector3.SqrMagnitude(walkPoint - transform.position);
+        if (distanceToWalkPoint < .5f)
+        {
+            FindPatrolPoint();
+        }
+    }
+
+    void SetDestinationToPlayer()
+    {
+        agent.SetDestination(player.transform.position);
+    }
+
+    void SetDestinationToRandom()
     {
         agent.SetDestination(player.transform.position);
     }
@@ -85,6 +118,40 @@ public class Enemy : MonoBehaviour
     void StopAgent()
     {
         agent.isStopped = true;
-        CancelInvoke(nameof(SetAgentDestination));
+        if (chasingPlayer)
+            CancelInvoke(nameof(SetDestinationToPlayer));
+        else
+            CancelInvoke(nameof(SetDestinationToRandom));
+    }
+
+    void CheckPlayerSight()
+    {
+        float distanceSquared = Vector3.SqrMagnitude(player.transform.position - transform.position);
+        if (distanceSquared < playerSightDistanceSquared)
+        {
+            StartChasingPlayer();
+        }
+    }
+
+    void StartChasingPlayer()
+    {
+        chasingPlayer = true;
+        CancelInvoke(nameof(SetDestinationToRandom));
+        InvokeRepeating(nameof(SetDestinationToPlayer), 0, updatePlayerTargetDelay);
+    }
+
+    void FindPatrolPoint()
+    {
+        bool success;
+        NavMeshHit hit;
+        do
+        {
+            Vector3 randomDir = Random.onUnitSphere;
+            Vector3 offset = RandomWalkPointDistance * randomDir;
+            success = NavMesh.SamplePosition(transform.position + offset, out hit, 2, 1);
+        } while (!success);
+
+        walkPoint = hit.position;
+        agent.SetDestination(walkPoint);
     }
 }
