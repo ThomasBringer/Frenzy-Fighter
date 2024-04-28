@@ -3,9 +3,12 @@
 ## Temps passé
 
 Phase 1 - Obligatoire : 5h30
+
 Phase 2 - UI : 1h30
 
-Total: 7h
+-----
+
+Total : 7h
 
 ## Difficultés et problématiques techniques
 
