@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// Damage shown when enemy is hit
 public class DamageText : MonoBehaviour
 {
     Animator anim;
