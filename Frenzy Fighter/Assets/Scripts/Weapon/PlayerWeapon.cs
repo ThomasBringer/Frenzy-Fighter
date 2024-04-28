@@ -15,11 +15,17 @@ public class PlayerWeapon : MonoBehaviour
 
     GameObject currentWeapon;
 
+    [SerializeField] Transform uiWeaponSlot;
+    int uiLayer;
+
+    GameObject currentWeaponUI;
+
     void Awake()
     {
         playerAttack = GetComponentInChildren<PlayerAttack>();
         playerMove = GetComponentInChildren<PlayerMove>();
         anim = GetComponentInChildren<Animator>();
+        uiLayer = LayerMask.NameToLayer("UI");
     }
 
     public void Equip(Weapon weapon)
@@ -28,11 +34,13 @@ public class PlayerWeapon : MonoBehaviour
         playerMove.speed = weapon.runSpeed;
         anim.SetFloat("fightSpeed", weapon.animationSpeed);
         currentWeapon = Instantiate(weapon.prefab, hand);
+        EquipUI(weapon);
     }
 
     void Unequip()
     {
         Destroy(currentWeapon);
+        Destroy(currentWeaponUI);
     }
 
     void Reequip(Weapon weapon)
@@ -50,5 +58,11 @@ public class PlayerWeapon : MonoBehaviour
             Destroy(weapon.gameObject);
             Reequip(weapon.weaponStats);
         }
+    }
+
+    void EquipUI(Weapon weapon)
+    {
+        currentWeaponUI = Instantiate(weapon.prefab, uiWeaponSlot);
+        currentWeaponUI.layer = uiLayer;
     }
 }
