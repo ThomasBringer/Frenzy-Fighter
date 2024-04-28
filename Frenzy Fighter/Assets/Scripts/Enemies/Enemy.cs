@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
     [Tooltip("Damage the enemy deals to the player.")]
     [SerializeField] float damage = 10;
 
+    WeaponSpawner weaponSpawner;
+
     void Awake()
     {
         health = GetComponent<Health>();
@@ -65,6 +67,8 @@ public class Enemy : MonoBehaviour
         playerSightDistanceSquared = playerSightDistance * playerSightDistance;
         distanceReachWalkPointSquared = distanceReachWalkPoint * distanceReachWalkPoint;
         FindPatrolPoint();
+
+        weaponSpawner = FindObjectOfType<WeaponSpawner>();
 
         // When enemy spawns, his health is buffed depending on the amount of enemies killed so far.
         health.Heal(enemyKillCount * healthBuffPerEnemyKilled);
@@ -105,6 +109,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, dieDestroyDelay);
         StopAgent();
         enemyKillCount++;
+        DropWeapon();
     }
 
     void Update()
@@ -230,5 +235,10 @@ public class Enemy : MonoBehaviour
         // If enemy is undamaged, each enemy killed gives him a health buff.
         if (!damaged)
             health.Heal(healthBuffPerEnemyKilled);
+    }
+
+    void DropWeapon()
+    {
+        weaponSpawner.SpawnWeapon(transform.position);
     }
 }
