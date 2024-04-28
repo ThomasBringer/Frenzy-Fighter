@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
     [Tooltip("After the enemy is killed, it will get destroyed after this delay.")]
     [SerializeField] float dieDestroyDelay = 5;
 
-    PlayerMove player;
+    Transform player;
+    Health playerHealth;
 
     [SerializeField] Transform graphics;
 
@@ -44,11 +45,22 @@ public class Enemy : MonoBehaviour
 
     static int enemyKillCount = 0;
 
+    [Tooltip("Max distance for the enemy to attack the player.")]
+    [SerializeField] float attackRange = 2;
+
+    bool attacking = false;
+
+    [Tooltip("Damage the enemy deals to the player.")]
+    [SerializeField] float damage = 10;
+
     void Awake()
     {
         health = GetComponent<Health>();
         anim = GetComponentInChildren<Animator>();
-        player = FindObjectOfType<PlayerMove>();
+
+        player = FindObjectOfType<PlayerMove>().transform;
+        playerHealth = player.GetComponentInChildren<Health>();
+
         agent = GetComponentInChildren<NavMeshAgent>();
         playerSightDistanceSquared = playerSightDistance * playerSightDistance;
         distanceReachWalkPointSquared = distanceReachWalkPoint * distanceReachWalkPoint;
@@ -103,8 +115,45 @@ public class Enemy : MonoBehaviour
 
     void AliveUpdate()
     {
-        if (!chasingPlayer)
+        if (chasingPlayer)
+            ChasingUpdate();
+        else
             PatrollingUpdate();
+    }
+
+    float DistanceToPlayerSquared => Vector3.SqrMagnitude(player.transform.position - transform.position);
+    bool IsPlayerInAttackRange => DistanceToPlayerSquared < attackRange;
+
+    void ChasingUpdate()
+    {
+        if (attacking)
+        {
+            if (!IsPlayerInAttackRange)
+                StopAttacking();
+        }
+        else
+        {
+            if (IsPlayerInAttackRange)
+                StartAttacking();
+        }
+    }
+
+    void StartAttacking()
+    {
+        attacking = true;
+        anim.SetBool("attacking", true);
+    }
+
+    void StopAttacking()
+    {
+        attacking = false;
+        anim.SetBool("attacking", false);
+    }
+
+    public void Attack()
+    {
+        if (IsPlayerInAttackRange)
+            playerHealth.Damage(damage);
     }
 
     void PatrollingUpdate()
@@ -137,8 +186,7 @@ public class Enemy : MonoBehaviour
     // Check if the player is in sight of the enemy
     void CheckPlayerSight()
     {
-        float distanceSquared = Vector3.SqrMagnitude(player.transform.position - transform.position);
-        if (distanceSquared < playerSightDistanceSquared)
+        if (DistanceToPlayerSquared < playerSightDistanceSquared)
         {
             StartChasingPlayer();
         }
