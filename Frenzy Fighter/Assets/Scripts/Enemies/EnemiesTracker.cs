@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// This class keeps track of which enemies are alive for the player to hit.
+// This class keeps track of which enemies are alive.
 public static class EnemiesTracker
 {
     static List<Enemy> enemies;
+
+    public static int EnemyCount
+    {
+        get
+        {
+            if (enemies == null) return 0;
+            return enemies.Count;
+        }
+    }
 
     public static void Add(Enemy enemy)
     {

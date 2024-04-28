@@ -19,6 +19,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] Enemy enemyPrefab;
 
+    [Tooltip("Max number of enemies on the map at the same time.")]
+    [SerializeField] int maxEnemyCount = 12;
+
     void Awake()
     {
         SpawnRepeating();
@@ -26,8 +29,14 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnRepeating()
     {
-        Spawn();
+        TrySpawn();
         Invoke(nameof(SpawnRepeating), TimeBetweenSpawns);
+    }
+
+    void TrySpawn()
+    {
+        if (EnemiesTracker.EnemyCount < maxEnemyCount)
+            Spawn();
     }
 
     void Spawn()
