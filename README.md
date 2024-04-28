@@ -6,9 +6,11 @@ Phase 1 - Obligatoire : 5h30
 
 Phase 2 - UI : 1h30
 
+Phase 3 - Ennemis: 3h30
+
 -----
 
-Total : 7h
+Total : 10h30
 
 ## Difficultés et problématiques techniques
 
@@ -27,6 +29,7 @@ Total : 7h
 ### Phase 3 - Ennemis
 - Problématique du choix de technologie pour faire des IA d'ennemi. Je choisis le plus standard, le NavMesh de Unity. Ça a l'avantage d'être puissant (on peut par exemple faire du pathfinding) et facile et rapide à mettre en place.
 - Léger problème : les ennemis peuvent pousser le joueur. Normal, les ennemis essaient de se rapprocher au plus du joueur, qui est un NavMesh Agent. Ma solution est de changer le paramètre Priority du joueur à 1 (priorité maximale). Ainsi le joueur peut pousser les ennemis, mais la réciproque est fausse.
+- Question de conception du comportement des ennemis. Le comportement le plus simple, qui consiste à ce que les ennemis se rapprochent constamment du joueur, est très lassant, et les ennemis tendent à se grouper très rapidement du fait de leur comportement semblable. Je choisis un comportement un peu plus compliqué pour les ennemis (mais toujours très standard) : les ennemis patrouillent au hasard. Seulement quand ils voient le joueur, ils se mettent à poursuivre le joueur. Cela reste un comportement basique, à améliorer pour rendre les ennemis plus crédibles.
 
 ## Comment m'améliorer
 
