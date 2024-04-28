@@ -7,30 +7,18 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [Tooltip("Amount of health of the character.")]
-    [SerializeField] float health;
+    public float health;
 
     [HideInInspector] public UnityEvent<float> onDamage = new UnityEvent<float>();
     [HideInInspector] public UnityEvent<float> onDie = new UnityEvent<float>();
     [HideInInspector] public bool dead = false;
-
-    HealthBar healthBar;
-    bool hasHealthBar;
-
-    void Awake()
-    {
-        healthBar = GetComponentInChildren<HealthBar>();
-        hasHealthBar = healthBar != null;
-        if (hasHealthBar)
-            healthBar.InitHealth(health);
-    }
 
     // Damage the current character. Returns true if the character is killed.
     public bool Damage(float damage)
     {
         if (dead) return true;
         health -= damage;
-
-        TryUpdateHealthBar();
+        health = Mathf.Max(health, 0);
 
         bool fatal = health <= 0;
         if (fatal)
@@ -45,11 +33,5 @@ public class Health : MonoBehaviour
     {
         dead = true;
         onDie.Invoke(damage);
-    }
-
-    void TryUpdateHealthBar()
-    {
-        if (hasHealthBar)
-            healthBar.SetHealth(health);
     }
 }
