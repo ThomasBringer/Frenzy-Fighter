@@ -12,10 +12,13 @@ public class Enemy : MonoBehaviour
     [Tooltip("After the enemy is killed, it will get destroyed after this delay.")]
     [SerializeField] float dieDestroyDelay = 5;
 
+    PlayerMove player;
+
     void Awake()
     {
         health = GetComponent<Health>();
         anim = GetComponentInChildren<Animator>();
+        player = FindObjectOfType<PlayerMove>();
     }
 
     void OnEnable()
@@ -46,5 +49,10 @@ public class Enemy : MonoBehaviour
         anim.SetTrigger("die");
         EnemiesTracker.Remove(this);
         Destroy(gameObject, dieDestroyDelay);
+    }
+
+    void Update()
+    {
+        transform.LookAt(player.transform);
     }
 }
