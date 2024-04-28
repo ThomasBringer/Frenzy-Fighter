@@ -7,5 +7,5 @@ public class Execute : MonoBehaviour
 {
     public UnityEvent myEvent = new UnityEvent();
 
-    public void Invoke() => myEvent.Invoke();
+    public void Run() => myEvent.Invoke();
 }
