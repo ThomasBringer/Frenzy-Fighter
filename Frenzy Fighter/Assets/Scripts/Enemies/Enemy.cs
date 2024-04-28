@@ -59,8 +59,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float weaponSpawnEjectDistance = 3;
 
     Renderer rendrr;
-    MaterialPropertyBlock flashWhitePropBlock;
-    [SerializeField] Texture flashWhiteTexture;
     [SerializeField] float flashWhiteDuration = .1f;
 
     void Awake()
@@ -116,6 +114,7 @@ public class Enemy : MonoBehaviour
 
     void Die(float damage)
     {
+        FlashIn();
         anim.SetTrigger("die");
         EnemiesTracker.Remove(this);
         Destroy(gameObject, dieDestroyDelay);
