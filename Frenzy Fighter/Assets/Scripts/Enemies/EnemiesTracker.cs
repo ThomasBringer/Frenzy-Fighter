@@ -57,4 +57,10 @@ public static class EnemiesTracker
         }
         return found;
     }
+
+    public static void Clear()
+    {
+        Debug.Log("clear");
+        enemies.Clear();
+    }
 }

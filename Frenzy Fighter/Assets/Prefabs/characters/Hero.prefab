@@ -562,6 +562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 1993995369825730728}
   weaponGrabRange: 2
+  uiWeaponSlot: {fileID: 0}
 --- !u!114 &3778655617061618946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,6 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b284d92b62f0d4dbe85223c785666e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayLoadGameOverScene: 2
 --- !u!195 &3578604145849895860
 NavMeshAgent:
   m_ObjectHideFlags: 0

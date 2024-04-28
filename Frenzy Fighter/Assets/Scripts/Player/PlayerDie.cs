@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDie : MonoBehaviour
+// Class handling player death
+public class PlayerDie : LoadScene
 {
     Animator anim;
     Health health;
@@ -10,6 +11,9 @@ public class PlayerDie : MonoBehaviour
     PlayerMove playerMove;
     PlayerAttack playerAttack;
     PlayerWeapon playerWeapon;
+
+    [Tooltip("Once player is dead, the game over scene will load after this delay, in seconds.")]
+    [SerializeField] float delayLoadGameOverScene = 4;
 
     void Awake()
     {
@@ -37,5 +41,12 @@ public class PlayerDie : MonoBehaviour
         playerMove.enabled = false;
         playerAttack.enabled = false;
         playerWeapon.enabled = false;
+
+        EnemiesTracker.Clear();
+        WeaponsTracker.Clear();
+
+        Invoke(nameof(LoadGameOver), delayLoadGameOverScene);
     }
+
+    void LoadGameOver() => Load("Game Over Menu");
 }

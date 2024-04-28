@@ -48,4 +48,9 @@ public static class WeaponsTracker
         }
         return found;
     }
+
+    public static void Clear()
+    {
+        weapons.Clear();
+    }
 }
