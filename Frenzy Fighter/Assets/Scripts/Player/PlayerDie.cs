@@ -49,6 +49,7 @@ public class PlayerDie : LoadScene
     {
         EnemiesTracker.Clear();
         WeaponsTracker.Clear();
+        Enemy.enemyKillCount = 0;
         Load("Game Over Menu");
     }
 }

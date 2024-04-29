@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float healthBuffPerEnemyKilled = 25;
     bool damaged = false;
 
-    static int enemyKillCount = 0;
+    public static int enemyKillCount = 0;
 
     [Tooltip("Max distance for the enemy to attack the player.")]
     [SerializeField] float attackRange = 2;
