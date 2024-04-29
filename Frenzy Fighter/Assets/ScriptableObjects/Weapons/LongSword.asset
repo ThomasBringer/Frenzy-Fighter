@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 15448191510330147, guid: bac79aa2a0057e5429a664d3f336da3d, type: 3}
   animationSpeed: 1.5
-  runSpeed: 7
-  attackRange: 5
+  runSpeed: 8
+  attackRange: 4

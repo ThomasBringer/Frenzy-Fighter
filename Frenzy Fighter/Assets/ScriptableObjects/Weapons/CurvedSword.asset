@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CurvedSword
   m_EditorClassIdentifier: 
   prefab: {fileID: 6937623146161485751, guid: 4d0814cafad460246890ec829fa7071d, type: 3}
-  animationSpeed: 1
-  runSpeed: 12
-  attackRange: 4
+  animationSpeed: 0.5
+  runSpeed: 4
+  attackRange: 3

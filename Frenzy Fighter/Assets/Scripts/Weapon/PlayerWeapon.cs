@@ -39,6 +39,13 @@ public class PlayerWeapon : MonoBehaviour
 
     void Unequip()
     {
+        ParticleSystem[] particles = currentWeapon.GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem particle in particles)
+        {
+            particle.transform.SetParent(hand);
+            particle.Stop();
+            Destroy(particle, 10);
+        }
         Destroy(currentWeapon);
         Destroy(currentWeaponUI);
     }
