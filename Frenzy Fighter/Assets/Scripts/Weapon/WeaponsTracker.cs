@@ -51,6 +51,7 @@ public static class WeaponsTracker
 
     public static void Clear()
     {
-        weapons.Clear();
+        if (weapons != null)
+            weapons.Clear();
     }
 }

@@ -60,7 +60,7 @@ public static class EnemiesTracker
 
     public static void Clear()
     {
-        Debug.Log("clear");
-        enemies.Clear();
+        if (enemies != null)
+            enemies.Clear();
     }
 }

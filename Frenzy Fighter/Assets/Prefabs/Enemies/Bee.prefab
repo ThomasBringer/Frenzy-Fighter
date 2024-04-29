@@ -60,7 +60,6 @@ MonoBehaviour:
   attackRange: 2.5
   damage: 10
   weaponSpawnEjectDistance: 3
-  flashWhiteDuration: 0.2
 --- !u!114 &641233700192451638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +473,7 @@ GameObject:
   - component: {fileID: 1061792335510622517}
   - component: {fileID: 7224070067995571032}
   - component: {fileID: 2414503718112486587}
+  - component: {fileID: 7617332983493331138}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Enemy
@@ -767,6 +767,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.1
+--- !u!114 &7617332983493331138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926839794863368119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fe67d77e5264b2f87082d4a02c3644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  duration: 0.2
 --- !u!1 &6926839794863368121
 GameObject:
   m_ObjectHideFlags: 0
