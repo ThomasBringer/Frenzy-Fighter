@@ -6,17 +6,17 @@ Jouer au jeu sur [itch.io](https://thomas-bringer.itch.io/frenzy-fighter).
 
 ## Temps passé
 
-Phase 1 - Obligatoire : 5h30
+#### Phase 1 - Obligatoire : 5h30
 
-Phase 2 - UI : 1h30
+#### Phase 2 - UI : 1h30
 
-Phase 3 - Ennemis : 3h30
+#### Phase 3 - Ennemis : 3h30
 
-Phase 4 - Armes : 1h
+#### Phase 4 - Armes : 1h
 
-Phase 5 - Polish : 2h30
+#### Phase 5 - Polish : 2h30
 
-Phase 6 - Améliorations visuelles : 3h
+#### Phase 6 - Améliorations visuelles : 3h
 
 Durant cette phase, j'ai fait les ajouts suivants :
 - Effet de freeze frame lors des attaques
@@ -27,7 +27,7 @@ Durant cette phase, j'ai fait les ajouts suivants :
 
 -----
 
-Total : 17h
+#### Total : 17h
 
 ## Difficultés et problématiques techniques
 
@@ -65,7 +65,11 @@ Après ces phases recommandées dans le document fourni, j'ai voulu ajouter quel
 
 ## Comment m'améliorer
 
-À compléter
+Globalement, je me suis senti à l'aise avec ce test technique. Les mécaniques étaient assez standard et tous les systèmes à développer se rapprochaient plus ou moins d'un de mes projets précédents.
+
+Si je devais m'améliorer, je pourrais considérer les points suivants :
+- Pour les attaques de mêlée, j'aurais pu envisager d'utiliser les collisions de Unity (par exemple : Physics.OverlapSphere). Ici, j'ai fait des opérations de calcul de distance (je regarde quel ennemi est le plus proche du joueur en calculant les distances au carré). S'il y avait un très grand nombre d'ennemis, il pourrait être plus performant d'utiliser le système de collisions de Unity.
+- Je devrais étudier les Addressable Assets de Unity pour pouvoir charger les assets de manière asynchrone. Je n'ai encore jamais utilisé ce système. Ceci dit, pour ce petit projet, il n'y a pas de problème particulier de temps de chargement d'assets.
 
 ## Que pourrais-je ajouter
 
