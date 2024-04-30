@@ -25,8 +25,6 @@ Durant cette phase, j'ai fait les ajouts suivants :
 - Particules (feu, électricité, lumière) sur les armes
 - Réorganisation du code
 
------
-
 #### Total : 17h
 
 ## Difficultés et problématiques techniques
@@ -55,13 +53,13 @@ Durant cette phase, j'ai fait les ajouts suivants :
 ### Phase 5 - Polish
 - Pas de difficulté particulière pour les menus.
 - Il y a plusieurs effets visuels possibles pour les impacts d'armes. Je choisis un flash lumineux blanc pour les ennemis, et un flash lumineux rouge pour le joueur.
-- Pour le son, je choisis de jouer les sons sous forme d'Animation Events de Unity. Ça me peremt de synchroniser les sons sur les animations. Cela est très utile pour le bruit d'impact d'épée ou encore pour les bruits de pas.
+- Pour le son, je choisis de jouer les sons sous forme d'Animation Events de Unity. Ça me permet de synchroniser les sons sur les animations. Cela est très utile pour le bruit d'impact d'épée ou encore pour les bruits de pas.
 
 ### Phase 6 - Améliorations visuelles
 Après ces phases recommandées dans le document fourni, j'ai voulu ajouter quelques détails pour améliorer le game feel et les visuels.
 - Je voulais rendre le combat plus impactant. Pour ça, je rajoute un freeze frame au niveau des impacts d'armes.
-- Je voulais rendre plus évident les moments où le joueur prend des dégâts. Je rajoute un screen shake avec Cinemachine, et je rajoute un effet d'aberration chromatique avec le Post-processing, qui véhicule bien l'idée de dégâts.
-- Le jeu manquait cruellement de particules, alors j'ai rajouté des effets de feu et d'électricité sur les armes. De plus les armes laissées par terre on effet de particules lumineux pour véhiculer l'idée que le joueur devrait les ramasser.
+- Je voulais rendre plus évidents les moments où le joueur prend des dégâts. Je rajoute un screen shake avec Cinemachine, et je rajoute un effet d'aberration chromatique avec le Post-processing, qui véhicule bien l'idée de dégâts.
+- Le jeu manquait cruellement de particules, alors j'ai rajouté des effets de feu et d'électricité sur les armes. De plus, les armes laissées par terre ont effet de particules lumineux pour véhiculer l'idée que le joueur devrait les ramasser.
 
 ## Comment m'améliorer
 
@@ -89,8 +87,8 @@ Il y a encore énormément d'améliorations mineures que je voudrais faire. Je p
 - Améliorer le lighting de la scène avec plusieurs lumières et une sur le joueur.
 
 Au-delà de ces ajustements mineurs, je pense que le gameplay a besoin de plus de profondeur pour rendre le jeu intéressant.
-- Pour le moment, le fait que les ennemis et le joueur n'aient que des attaques rapprochées n'est pas très intéressant. Je proposerais soit une mécanique d'arme à portée (arc, magie) pour le joueur ou les ennemis. Je proposerais également une mécanique de roulade d'esquive : si le joueur appuie sur l'écran pour se déplacer alors qu'un ennemi s'apprête à l'attaquer, le joueur fait une roulade ce qui lui donne quelques centièmes de seconde d'invincibilité. Cette mécanique équilibrerait le combat entre attaque et esquive.
+- Pour le moment, le fait que les ennemis et le joueur n'aient que des attaques rapprochées n'est pas très intéressant. Je proposerais soit une mécanique d'arme à portée (arc, magie) pour le joueur ou les ennemis. Je proposerais également une mécanique de roulade d'esquive : si le joueur appuie sur l'écran pour se déplacer alors qu'un ennemi s'apprête à l'attaquer, le joueur fait une roulade, ce qui lui donne quelques centièmes de seconde d'invincibilité. Cette mécanique équilibrerait le combat entre attaque et esquive.
 - Il faudrait beaucoup plus d'armes à découvrir pour le joueur avec des statistiques différentes. Les armes devraient faire des dégâts différents.
 - Il faudrait beaucoup plus d'ennemis différents, avec des attaques différentes et des comportements différents. Pourquoi pas des boss.
-- Il faudrait améliorer le niveau avec des objets, structures, peut-être du relief.
-- Il faudrait trouver une manière de progresser durablement pour le joueur. Par exemple, un système classique de niveau, avec une carte du monde sur laquelle le joueur peut avancer.
+- Il faudrait améliorer l'environnement avec des objets, structures, peut-être du relief.
+- Il faudrait trouver une manière de progresser durablement pour le joueur. Par exemple, un système classique de niveaux, avec une carte du monde sur laquelle le joueur peut avancer.
