@@ -12,9 +12,16 @@ Phase 4 - Armes : 1h
 
 Phase 5 - Polish : 2h30
 
+Phase 6 - Améliorations visuelles : 3h
+Durant cette phase, j'ai fait les ajouts suivants :
+- Effet de freeze frame lors des attaques
+- Screen shake lors des attaques
+- Post-processing et aberration chromatique lors des attaques
+- Particules (feu, électricité, lumière) sur les armes
+
 -----
 
-Total : 14h
+Total : 17h
 
 ## Difficultés et problématiques techniques
 
