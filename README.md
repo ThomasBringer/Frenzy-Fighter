@@ -1,5 +1,9 @@
 # Frenzy-Fighter
 
+Jeu développé en 17h pour le test technique de Madbox.
+
+Jouer au jeu sur [itch.io](https://thomas-bringer.itch.io/frenzy-fighter).
+
 ## Temps passé
 
 Phase 1 - Obligatoire : 5h30
@@ -13,11 +17,13 @@ Phase 4 - Armes : 1h
 Phase 5 - Polish : 2h30
 
 Phase 6 - Améliorations visuelles : 3h
+
 Durant cette phase, j'ai fait les ajouts suivants :
 - Effet de freeze frame lors des attaques
 - Screen shake lors des attaques
 - Post-processing et aberration chromatique lors des attaques
 - Particules (feu, électricité, lumière) sur les armes
+- Réorganisation du code
 
 -----
 
@@ -46,10 +52,41 @@ Total : 17h
 - Pas de difficulté particulière pour la mécanique de spawn d'armes. Avec le système en place des ScriptableObject, le code pour spawn et équiper les armes est similaire au code déjà effectué plus tôt pour spawn les ennemis et pour les attaquer.
 - Seule problématique : afficher l'arme (un modèle 3D) sur le UI. Je connais deux manière de le faire, soit utiliser des Render textures, soit mettre la caméra en mode Screen space - camera et placer l'arme directement sur le GUI. J'ai choisi la deuxième option. À noter qu'en choisissant la deuxième option, il faut veiller à ce que le GUI ne clip pas avec le jeu. Ici pas de souci, j'ai déjà mis en place une deuxième caméra pour éviter ce problème (comme décrit phase 2 tiret 2).
 
+### Phase 5 - Polish
+- Pas de difficulté particulière pour les menus.
+- Il y a plusieurs effets visuels possibles pour les impacts d'armes. Je choisis un flash lumineux blanc pour les ennemis, et un flash lumineux rouge pour le joueur.
+- Pour le son, je choisis de jouer les sons sous forme d'Animation Events de Unity. Ça me peremt de synchroniser les sons sur les animations. Cela est très utile pour le bruit d'impact d'épée ou encore pour les bruits de pas.
+
+### Phase 6 - Améliorations visuelles
+Après ces phases recommandées dans le document fourni, j'ai voulu ajouter quelques détails pour améliorer le game feel et les visuels.
+- Je voulais rendre le combat plus impactant. Pour ça, je rajoute un freeze frame au niveau des impacts d'armes.
+- Je voulais rendre plus évident les moments où le joueur prend des dégâts. Je rajoute un screen shake avec Cinemachine, et je rajoute un effet d'aberration chromatique avec le Post-processing, qui véhicule bien l'idée de dégâts.
+- Le jeu manquait cruellement de particules, alors j'ai rajouté des effets de feu et d'électricité sur les armes. De plus les armes laissées par terre on effet de particules lumineux pour véhiculer l'idée que le joueur devrait les ramasser.
+
 ## Comment m'améliorer
 
 À compléter
 
 ## Que pourrais-je ajouter
 
-À compléter
+Il y a encore énormément d'améliorations mineures que je voudrais faire. Je pense que le polish de ce jeu ne fait que commencer. Parmi mes idées de polish mineures :
+- Afficher le score du joueur dans le menu Game Over.
+- Ajouter un bruit d'abeille pour les ennemis.
+- Ajouter une animation de drop d'arme, avec un effet sonore, et une trail à l'arme. Le but est de mettre en valeur le loot.
+- Les armes déposées devraient flotter en l'air avec une animation et tourner au cours du temps pour les mettre en valeur.
+- Les armes devraient avoir un shader / effet visuel métallique étincelant (améliorer le matériau et ajouter une particule étincelante).
+- Les ennemis devraient spawn avec une animation de spawn.
+- Les ennemis devraient disparaître avec une animation (simplement rétrécir rapidement jusqu'à disparaître).
+- Il faudrait une trail sur les armes qui apparaît seulement lors de l'attaque, un effet de swing qui mettrait en valeur l'attaque.
+- Ajouter des particules ambientes dans l'air.
+- Ajouter des particules de poussière lorsque le joueur court.
+- Il devrait y avoir une animation et un effet sonore pour le compteur de score lorsque le joueur marque un point.
+- Des transitions entre les menus et le jeu.
+- Améliorer le lighting de la scène avec plusieurs lumières et une sur le joueur.
+
+Au-delà de ces ajustements mineurs, je pense que le gameplay a besoin de plus de profondeur pour rendre le jeu intéressant.
+- Pour le moment, le fait que les ennemis et le joueur n'aient que des attaques rapprochées n'est pas très intéressant. Je proposerais soit une mécanique d'arme à portée (arc, magie) pour le joueur ou les ennemis. Je proposerais également une mécanique de roulade d'esquive : si le joueur appuie sur l'écran pour se déplacer alors qu'un ennemi s'apprête à l'attaquer, le joueur fait une roulade ce qui lui donne quelques centièmes de seconde d'invincibilité. Cette mécanique équilibrerait le combat entre attaque et esquive.
+- Il faudrait beaucoup plus d'armes à découvrir pour le joueur avec des statistiques différentes. Les armes devraient faire des dégâts différents.
+- Il faudrait beaucoup plus d'ennemis différents, avec des attaques différentes et des comportements différents. Pourquoi pas des boss.
+- Il faudrait améliorer le niveau avec des objets, structures, peut-être du relief.
+- Il faudrait trouver une manière de progresser durablement pour le joueur. Par exemple, un système classique de niveau, avec une carte du monde sur laquelle le joueur peut avancer.
