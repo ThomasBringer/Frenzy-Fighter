@@ -2,7 +2,7 @@
 
 Jeu développé en 17h pour le test technique de Madbox.
 
-Jouer au jeu sur [itch.io](https://thomas-bringer.itch.io/frenzy-fighter).
+Jouer au jeu, ou télécharger l'APK, sur [itch.io](https://thomas-bringer.itch.io/frenzy-fighter).
 
 ## Temps passé
 
